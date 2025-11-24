@@ -1,9 +1,6 @@
 from api.models.servicio import ServicioTuristico
 
 def filtrar_servicios(categoria=None, ciudad=None, certificado=None):
-    """
-    Filtra los servicios turísticos según los criterios.
-    """
     queryset = ServicioTuristico.objects.all()
     
     if categoria:

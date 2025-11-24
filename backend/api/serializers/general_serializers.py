@@ -4,6 +4,7 @@ from api.models.prestador import PrestadorServicio
 from api.models.servicio import ServicioTuristico
 from api.models.denuncia import Denuncia
 from api.models.calificacion import Calificacion
+from api.models.turista import Turista
 
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
@@ -28,4 +29,9 @@ class DenunciaSerializer(serializers.ModelSerializer):
 class CalificacionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Calificacion
+        fields = '__all__'
+
+class TuristaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Turista
         fields = '__all__'
