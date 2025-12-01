@@ -3,10 +3,6 @@ from .usuario import Usuario
 from .prestador import PrestadorServicio
 
 class Interaccion(models.Model):
-    """
-    Modelo para registrar interacciones reales entre usuario y prestador.
-    Sirve para validar si un usuario puede calificar.
-    """
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     prestador = models.ForeignKey(PrestadorServicio, on_delete=models.CASCADE)
     fecha_interaccion = models.DateTimeField(auto_now_add=True)

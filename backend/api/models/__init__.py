@@ -1,8 +1,9 @@
 from .usuario import Usuario
-from .rol import Rol
-from .prestador import PrestadorServicio
+from .prestador import EmpresaPrestadora, PrestadorIndividual
+from .certificados import CertificadoHabilidades
+from .empleados import EmpleadoRegistrado
 from .servicio import ServicioTuristico
+from .propina import RegistroPropina
+from .turista import Turista
 from .denuncia import Denuncia
 from .calificacion import Calificacion
-from .interaccion import Interaccion
-from .turista import Turista
