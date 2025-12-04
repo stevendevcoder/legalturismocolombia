@@ -1,20 +1,20 @@
 from django.db import models
-from .servicio import ServicioTuristico
+from .servicio import CardServicioVenta
 from .turista import Turista
 
-class Calificacion(models.Model):
-    puntuacion_general = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)])
-    feedback_empresa = models.CharField(max_length=50, blank=True, null=True)
-    puntuacion_certificados = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)], blank=True, null=True)
-    calificacion_puntualidad = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)], blank=True, null=True)
-    calificacion_limpieza = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)], blank=True, null=True)
-    fecha_calificacion = models.DateTimeField(auto_now_add=True)
-    id_card_servicio_fk = models.ForeignKey(ServicioTuristico, on_delete=models.CASCADE, related_name='calificaciones')
-    id_turistas_fk = models.ForeignKey(Turista, on_delete=models.CASCADE, related_name='calificaciones')
+class CalificacionServicioUsuario(models.Model):
+    class Escala(models.TextChoices):
+        UNO = "1"
+        DOS = "2"
+        TRES = "3"
+        CUATRO = "4"
+        CINCO = "5"
 
-    def __str__(self):
-        return f"Calificación {self.puntuacion_general} para {self.id_card_servicio_fk}"
-
-    class Meta:
-        verbose_name = "Calificación"
-        verbose_name_plural = "Calificaciones"
+    puntuacion_general = models.CharField(max_length=2, choices=Escala.choices)
+    feedback_empresa = models.CharField(max_length=50)
+    puntuacion_certificados = models.CharField(max_length=2, choices=Escala.choices)
+    calificacion_puntualidad = models.CharField(max_length=2, choices=Escala.choices)
+    calificacion_limpieza = models.CharField(max_length=2, choices=Escala.choices)
+    fecha_calificacion = models.DateTimeField()
+    id_card_servicio = models.ForeignKey(CardServicioVenta, on_delete=models.CASCADE)
+    id_turistas = models.ForeignKey(Turista, on_delete=models.CASCADE)

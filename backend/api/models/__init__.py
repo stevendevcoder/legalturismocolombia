@@ -1,9 +1,10 @@
 from .usuario import Usuario
-from .prestador import EmpresaPrestadora, PrestadorIndividual
-from .certificados import CertificadoHabilidades
-from .empleados import EmpleadoRegistrado
-from .servicio import ServicioTuristico
-from .propina import RegistroPropina
+from .denuncia import RegistroReporte
 from .turista import Turista
-from .denuncia import Denuncia
-from .calificacion import Calificacion
+from .empresas_prestadoras import EmpresaPrestadora
+from .empleados_registrados import EmpleadoRegistrado
+from .certificados import CertificadoHabilidad
+from .prestador_individual import PrestadorIndividual
+from .servicio import CardServicioVenta
+from .calificacion import CalificacionServicioUsuario
+from .propina import RegistroPropina
