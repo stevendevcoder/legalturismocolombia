@@ -1,6 +1,6 @@
 from django.db import models
 
-class CertificadoHabilidades(models.Model):
+class Certificado(models.Model):
     nombre_certificado = models.CharField(max_length=100)
     tipo_certificado = models.CharField(max_length=100)
     entidad_emisora = models.CharField(max_length=100)

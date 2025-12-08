@@ -1,20 +1,20 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from api.views.general_views import (
-    RegistroPrestadorView,
-    CrearDenunciaView,
-    BusquedaServiciosView,
-    VerificacionQRView,
-    TuristaViewSet
+from django.urls import path
+from api.views.usuarioyturista_controller import (
+    LoginView, RegisterView, LogoutView, MeView
 )
 
-router = DefaultRouter()
-router.register(r'turistas', TuristaViewSet)
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+from legalturismocolombia.backend.api import admin
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('prestadores/registro/', RegistroPrestadorView.as_view(), name='registro_prestador'),
-    path('denuncias/crear/', CrearDenunciaView.as_view(), name='crear_denuncia'),
-    path('servicios/buscar/', BusquedaServiciosView.as_view(), name='buscar_servicios'),
-    path('qr/verificar/<str:codigo>/', VerificacionQRView.as_view(), name='verificar_qr'),
+    path('admin/', admin.site.urls),
+    # --- Autenticación ---
+    path('auth/register/', RegisterView.as_view(), name='auth_register'),
+    path('auth/login/', LoginView.as_view(), name='auth_login'),
+    path('auth/logout/', LogoutView.as_view(), name='auth_logout'),
+    path('auth/me/', MeView.as_view(), name='auth_me'),
+    # --- JWT Tokens ---
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

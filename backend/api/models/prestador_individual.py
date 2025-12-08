@@ -1,6 +1,6 @@
 from django.db import models
 from .usuario import Usuario
-from .certificados import CertificadoHabilidad
+from .certificados import Certificado
 from .servicio import CardServicioVenta
 
 class PrestadorIndividual(models.Model):
@@ -14,7 +14,7 @@ class PrestadorIndividual(models.Model):
 
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     id_certificados_habilidades = models.ForeignKey(
-        CertificadoHabilidad, on_delete=models.SET_NULL, null=True
+        Certificado, on_delete=models.SET_NULL, null=True
     )
     id_cardServicioVenta = models.ForeignKey(
         CardServicioVenta, on_delete=models.SET_NULL, null=True
