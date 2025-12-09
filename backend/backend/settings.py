@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'api'
 ]
 
@@ -81,11 +82,14 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'legalturismocolombia',
+        'NAME': 'legalturismo_db',
         'USER': 'postgres',
         'PASSWORD': '1921',  # Cambia esto por tu contraseña real
         'HOST': 'localhost',
         'PORT': '5432',
+        'OPTIONS': {
+            'options': '-c search_path=legalturismo'
+        }
     }
 }
 
