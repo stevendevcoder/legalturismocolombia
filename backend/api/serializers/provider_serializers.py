@@ -25,5 +25,4 @@ class PrestadorIndividualSerializer(serializers.ModelSerializer):
         model = PrestadorIndividual
         fields = '__all__'
 
-# Serializer that can represent either provider type in a list?
-# For /api/providers/ endpoint, we might want a polymorphic representation or just combine them in the view.
+
