@@ -8,7 +8,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         PRESTADOR = "PRESTADOR", "Prestador Individual"
         EMPRESA = "EMPRESA", "Empresa"
 
-    username = None # Desactivamos username por defecto
+    username = None 
     email = models.EmailField(unique=True)
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
@@ -20,7 +20,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     nombre_tipo = models.CharField(max_length=30, choices=TipoUsuario.choices)
     activo = models.BooleanField(default=True)
     
-    # Staff status es necesario para el admin de Django
+    
     is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
