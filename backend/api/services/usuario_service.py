@@ -14,7 +14,7 @@ Usuario = get_user_model()
 class UsuarioService:
 
     # =======================================================
-    # CREACIÓN DE USUARIO (El que arreglamos)
+    # CREACIÓN DE USUARIO
     # =======================================================
     @staticmethod
     def crear_usuario(data):
@@ -73,9 +73,7 @@ class UsuarioService:
             "access": str(refresh.access_token)
         }
 
-    # =======================================================
-    # OTROS MÉTODOS 
-    # =======================================================
+    
     @staticmethod
     def obtener_usuario_por_id(user_id):
         return UsuarioRepo.get_by_id(user_id)
@@ -85,21 +83,21 @@ class UsuarioService:
         """
         Actualiza datos del usuario base Y de su perfil específico (Turista/Empresa).
         """
-        # 1. Evitar que cambien datos sensibles o inmutables
+        
         data.pop("nombre_tipo", None) 
-        data.pop("email", None) # Generalmente el email no se cambia tan fácil
-        data.pop("password", None) # La contraseña tiene su propio endpoint
+        data.pop("email", None) 
+        data.pop("password", None) 
 
-        # 2. Extraer datos de perfiles
+        
         turista_data = data.pop("turista", None)
         empresa_data = data.pop("empresa", None)
         prestador_data = data.pop("prestador", None)
 
-        # 3. Actualizar Usuario Base
+       
         if data:
             usuario = UsuarioRepo.update(usuario, data)
 
-        # 4. Actualizar Perfil Específico
+        
         if usuario.nombre_tipo == "TURISTA" and turista_data:
             Turista.objects.filter(usuario=usuario).update(**turista_data)
 
