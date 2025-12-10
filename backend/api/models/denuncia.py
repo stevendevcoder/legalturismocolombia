@@ -12,12 +12,16 @@ class RegistroReporte(models.Model):
         ABIERTO = "ABIERTO"
         EN_PROCESO = "EN_PROCESO"
         CERRADO = "CERRADO"
+from .usuario import Usuario
+
 class Denuncia(models.Model):
     """
     Modelo para gestionar las denuncias realizadas por usuarios.
     """
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='denuncias_realizadas')
-    prestador = models.ForeignKey(PrestadorServicio, on_delete=models.CASCADE, related_name='denuncias_recibidas')
+    # prestador = models.ForeignKey(PrestadorServicio, on_delete=models.CASCADE, related_name='denuncias_recibidas')
+    empresa_prestadora = models.ForeignKey(EmpresaPrestadora, on_delete=models.CASCADE, null=True, blank=True, related_name='denuncias_recibidas')
+    prestador_individual = models.ForeignKey(PrestadorIndividual, on_delete=models.CASCADE, null=True, blank=True, related_name='denuncias_recibidas')
     motivo = models.CharField(max_length=255)
     descripcion = models.TextField()
     evidencia = models.FileField(upload_to='evidencias/', blank=True, null=True)
@@ -29,10 +33,10 @@ class Denuncia(models.Model):
     )
 
     fecha_hora_reporte = models.DateTimeField(null=True, blank=True)
-    tipo_reporte = models.CharField(max_length=20, choices=TipoReporte.choices)
+    tipo_reporte = models.CharField(max_length=20, choices=RegistroReporte.TipoReporte.choices)
     descripcion_detallada = models.TextField()
     url_evidencia_adjunta = models.CharField(max_length=255, null=True, blank=True)
-    estado_gestion = models.CharField(max_length=20, choices=EstadoGestion.choices)
+    estado_gestion = models.CharField(max_length=20, choices=RegistroReporte.EstadoGestion.choices)
     fecha_cierre_gestion = models.DateTimeField(null=True, blank=True)
     gestion_tomada = models.TextField(null=True, blank=True)
 

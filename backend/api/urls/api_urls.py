@@ -19,13 +19,15 @@ from api.views.general_views import (
 
 from api.views.provider_views import ProviderViewSet
 from api.views.service_views import ServiceViewSet
+from api.views.employee_views import EmpleadoViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from api.views.usuario_controller import MeAPIView, UserProfileUpdateView
+from api.views.usuario_controller import MeAPIView
 
 router = DefaultRouter()
 router.register(r'turistas', TuristaViewSet)
 router.register(r'providers', ProviderViewSet, basename='provider')
 router.register(r'services', ServiceViewSet, basename='service')
+router.register(r'employees', EmpleadoViewSet, basename='employee')
 
 urlpatterns = [
     # --- Autenticación ---
@@ -33,7 +35,7 @@ urlpatterns = [
     path('auth/logout/', LogoutAPIView.as_view(), name='auth_logout'),
     path('auth/me/', MeAPIView.as_view(), name='auth_me'),
     path('auth/login/', LoginAPIView.as_view(), name='auth_login'),
-    path('users/profile/', UserProfileUpdateView.as_view(), name='update_profile'),
+    path('users/profile/', MeAPIView.as_view(), name='user_profile'),
     # --- JWT Tokens ---
     path('api/auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
@@ -46,7 +48,8 @@ urlpatterns = [
     path('services/<int:id>/reviews/create/', CrearCalificacionView.as_view()),
 
     # Denuncias
+    # Denuncias
     path('reports/', CrearDenunciaView.as_view()),
     path('reports/my-reports/', MisDenunciasView.as_view()),
-]
+] + router.urls
     

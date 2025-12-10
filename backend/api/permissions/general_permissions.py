@@ -15,10 +15,10 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         
         # For Service (CardServicioVenta)
         if hasattr(obj, 'empresa_prestadora') and obj.empresa_prestadora:
-             if obj.empresa_prestadora.id_usuario == request.user:
+             if obj.empresa_prestadora.usuario == request.user:
                  return True
         if hasattr(obj, 'prestador_individual') and obj.prestador_individual:
-             if obj.prestador_individual.id_usuario == request.user:
+             if obj.prestador_individual.usuario == request.user:
                  return True
                  
         # For Provider Profiles

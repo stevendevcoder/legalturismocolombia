@@ -112,37 +112,30 @@ class UsuarioService:
 
     @staticmethod
     def obtener_detalles_completos(usuario):
+        # Importación local para evitar import circular con serializers
+        from api.serializers.register_serializer import TuristaSerializer, EmpresaPrestadoraSerializer, PrestadorSerializer
+        
         response = {
             "id": usuario.id,
             "email": usuario.email,
             "nombre": usuario.nombre,
+            "apellido": usuario.apellido, # Agregamos apellido
             "nombre_tipo": usuario.nombre_tipo
         }
 
         if usuario.nombre_tipo == "TURISTA":
             turista = Turista.objects.filter(usuario=usuario).first()
             if turista:
-                # Ajusta estos campos según tu modelo real de Turista
-                response["turista"] = {
-                    "pais_residencia": turista.pais_residencia,
-                    "idioma_preferido": turista.idioma_preferido,
-                }
+                response["turista"] = TuristaSerializer(turista).data
 
         elif usuario.nombre_tipo == "EMPRESA":
             empresa = EmpresaPrestadora.objects.filter(usuario=usuario).first()
             if empresa:
-                # Ajusta estos campos según tu modelo real de Empresa
-                response["empresa"] = {
-                    "nit_empresa": empresa.nit_empresa,
-                    "nombre_razon_social": empresa.nombre_razon_social,
-                }
+                response["empresa"] = EmpresaPrestadoraSerializer(empresa).data
         
         elif usuario.nombre_tipo == "PRESTADOR":
             prestador = PrestadorIndividual.objects.filter(usuario=usuario).first()
             if prestador:
-                 # Ajusta estos campos según tu modelo real de Prestador
-                response["prestador"] = {
-                    "profesion": prestador.profesion_servicio_principal,
-                }
+                response["prestador"] = PrestadorSerializer(prestador).data
 
         return response

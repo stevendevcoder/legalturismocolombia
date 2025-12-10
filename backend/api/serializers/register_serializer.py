@@ -53,6 +53,37 @@ class RegistrationSerializer(serializers.Serializer):
     empresa = EmpresaPrestadoraSerializer(required=False)
     prestador = PrestadorSerializer(required=False)
 
+    def to_internal_value(self, data):
+        # Convertir QueryDict a diccionario plano python mutable
+        if hasattr(data, 'dict'):
+            data = data.dict()
+        else:
+            data = data.copy() # Si ya es dict, copiamos
+
+        tipo = data.get("nombre_tipo")
+
+        # Helper para mover campos planos a un diccionario anidado
+        def nest_data(serializer_cls, target_key):
+            fields = serializer_cls().fields.keys()
+            nested_dict = {}
+            for field in fields:
+                if field in data:
+                    nested_dict[field] = data.get(field)
+            
+            if nested_dict:
+                data[target_key] = nested_dict
+
+        if tipo == Usuario.TipoUsuario.TURISTA:
+            nest_data(TuristaSerializer, "turista")
+
+        elif tipo == Usuario.TipoUsuario.EMPRESA:
+            nest_data(EmpresaPrestadoraSerializer, "empresa")
+
+        elif tipo == Usuario.TipoUsuario.PRESTADOR:
+            nest_data(PrestadorSerializer, "prestador")
+
+        return super().to_internal_value(data)
+
     def validate(self, data):
         tipo = data.get("nombre_tipo")
 

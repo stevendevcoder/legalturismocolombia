@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from api.models import Usuario, EmpresaPrestadora, PrestadorIndividual, RegistroReporte, CalificacionServicioUsuario, Turista
+from api.models import Usuario, EmpresaPrestadora, PrestadorIndividual, RegistroReporte, CalificacionServicioUsuario, Turista, Denuncia
 from api.models.servicio import CardServicioVenta
 
 
@@ -9,10 +9,10 @@ class UsuarioSerializer(serializers.ModelSerializer):
         model = Usuario
         fields = '__all__'
 
-class PrestadorServicioSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PrestadorServicio
-        fields = '__all__'
+# class PrestadorServicioSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         # model = PrestadorServicio
+#         fields = '__all__'
 
 class ServicioTuristicoSerializer(serializers.ModelSerializer):
     class Meta:

@@ -49,6 +49,8 @@ class LoginAPIView(APIView):
         return Response({
             "message": "Inicio de sesión exitoso",
             "usuario": UsuarioSerializer(usuario).data,
+            "role": usuario.nombre_tipo,
+            "user_id": usuario.id,
             "tokens": tokens
         })
 

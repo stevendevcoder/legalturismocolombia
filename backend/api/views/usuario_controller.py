@@ -12,14 +12,8 @@ class MeAPIView(APIView):
         data = UsuarioService.obtener_detalles_completos(usuario)
         return Response(data)
 
-# 2. Endpoint: PATCH /api/users/profile/
-# Esta es la clase nueva que te faltaba para cumplir con la imagen
-class UserProfileUpdateView(APIView):
-    permission_classes = [permissions.IsAuthenticated]
-
     def patch(self, request):
         usuario = request.user
-        
         try:
             # Llamamos al servicio para actualizar (incluyendo datos anidados de Turista/Empresa)
             usuario_actualizado = UsuarioService.actualizar_usuario(usuario, request.data)
@@ -29,5 +23,4 @@ class UserProfileUpdateView(APIView):
             return Response(data, status=status.HTTP_200_OK)
             
         except Exception as e:
-            # Manejo de errores básico
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)

@@ -18,6 +18,7 @@ class CalificacionServicioUsuario(models.Model):
     fecha_calificacion = models.DateTimeField(null=True, blank=True)
     id_card_servicio = models.ForeignKey(CardServicioVenta, on_delete=models.CASCADE)
     id_turistas = models.ForeignKey(Turista, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
 
     
     def __str__(self):

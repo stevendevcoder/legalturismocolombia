@@ -1,5 +1,5 @@
 from .usuario import Usuario
-from .denuncia import RegistroReporte
+from .denuncia import RegistroReporte, Denuncia
 from .turista import Turista
 from .empresas_prestadoras import EmpresaPrestadora
 from .empleados_registrados import EmpleadoRegistrado
