@@ -14,7 +14,7 @@ Usuario = get_user_model()
 class UsuarioService:
 
     # =======================================================
-    # 🔹 CREACIÓN DE USUARIO (El que arreglamos)
+    # CREACIÓN DE USUARIO (El que arreglamos)
     # =======================================================
     @staticmethod
     def crear_usuario(data):
@@ -59,8 +59,9 @@ class UsuarioService:
             raise ValidationError({"error": "Error de integridad en la base de datos"})
 
     # =======================================================
-    # 🔹 GENERACIÓN DE TOKENS (El que faltaba)
+    # GENERACIÓN DE TOKENS 
     # =======================================================
+    
     @staticmethod
     def generar_tokens(usuario):
         """
@@ -73,7 +74,7 @@ class UsuarioService:
         }
 
     # =======================================================
-    # 🔹 OTROS MÉTODOS (Para que funcione MeAPIView y Login)
+    # OTROS MÉTODOS 
     # =======================================================
     @staticmethod
     def obtener_usuario_por_id(user_id):
@@ -112,14 +113,14 @@ class UsuarioService:
 
     @staticmethod
     def obtener_detalles_completos(usuario):
-        # Importación local para evitar import circular con serializers
+        
         from api.serializers.register_serializer import TuristaSerializer, EmpresaPrestadoraSerializer, PrestadorSerializer
         
         response = {
             "id": usuario.id,
             "email": usuario.email,
             "nombre": usuario.nombre,
-            "apellido": usuario.apellido, # Agregamos apellido
+            "apellido": usuario.apellido, 
             "nombre_tipo": usuario.nombre_tipo
         }
 
