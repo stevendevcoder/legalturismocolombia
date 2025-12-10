@@ -17,7 +17,7 @@ class RegisterAPIView(APIView):
         if serializer.is_valid():
             usuario = UsuarioService.crear_usuario(serializer.validated_data)
 
-            # generar tokens del usuario recién creado
+            
             tokens = UsuarioService.generar_tokens(usuario)
 
             return Response({
@@ -35,7 +35,7 @@ class LoginAPIView(APIView):
         email = request.data.get("email")
         password = request.data.get("password")
 
-        # Autenticación manual porque usas email como USERNAME_FIELD
+        
         usuario = authenticate(request, email=email, password=password)
 
         if usuario is None:
