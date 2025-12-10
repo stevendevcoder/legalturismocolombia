@@ -16,7 +16,7 @@ from api.serializers.general_serializers import (
     CalificacionSerializer,
     ServicioTuristicoSerializer
 )
-# from api.serializers.provider_serializers import ...
+
 
 class TuristaViewSet(viewsets.ModelViewSet):
     queryset = Turista.objects.all()
@@ -42,7 +42,7 @@ class RegistroPrestadorView(views.APIView):
     permission_classes = [AllowAny]
     
     def post(self, request):
-        # Placeholder for provider registration logic
+        
         return Response({"message": "Registro de prestador no implementado aun."}, status=status.HTTP_501_NOT_IMPLEMENTED)
 
 class BusquedaServiciosView(generics.ListAPIView):
