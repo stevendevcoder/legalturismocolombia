@@ -24,7 +24,7 @@ class CardServicioVenta(models.Model):
         RegistroPropina, on_delete=models.SET_NULL, null=True
     )
     
-    # Relations
+    
     empresa_prestadora = models.ForeignKey('EmpresaPrestadora', on_delete=models.CASCADE, null=True, blank=True, related_name='servicios')
     prestador_individual = models.ForeignKey('PrestadorIndividual', on_delete=models.CASCADE, null=True, blank=True, related_name='servicios')
 
