@@ -1,5 +1,7 @@
 from django.db import models
 from .prestador import PrestadorServicio
+from django.db.models import Avg
+
 
 class ServicioTuristico(models.Model):
     """
@@ -13,10 +15,19 @@ class ServicioTuristico(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     certificado = models.BooleanField(default=False)
     activo = models.BooleanField(default=True)
-
+    def promedio_calificacion(self):
+        reseñas = self.reseñas.all()
+        if reseñas.exists():
+            return sum(r.estrellas for r in reseñas) / reseñas.count()
+        return 0
     def __str__(self):
         return self.nombre
 
     class Meta:
         verbose_name = "Servicio Turístico"
         verbose_name_plural = "Servicios Turísticos"
+    
+    
+    
+
+    

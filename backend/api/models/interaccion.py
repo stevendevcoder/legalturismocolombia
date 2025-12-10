@@ -2,6 +2,8 @@ from django.db import models
 from .usuario import Usuario
 from .prestador import PrestadorServicio
 
+
+
 class Interaccion(models.Model):
     """
     Modelo para registrar interacciones reales entre usuario y prestador.
@@ -18,3 +20,6 @@ class Interaccion(models.Model):
     class Meta:
         verbose_name = "Interacción"
         verbose_name_plural = "Interacciones"
+    
+
+        

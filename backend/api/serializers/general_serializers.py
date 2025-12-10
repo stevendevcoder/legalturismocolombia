@@ -6,6 +6,8 @@ from api.models.denuncia import Denuncia
 from api.models.calificacion import Calificacion
 from api.models.turista import Turista
 
+
+
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
@@ -24,7 +26,8 @@ class ServicioTuristicoSerializer(serializers.ModelSerializer):
 class DenunciaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Denuncia
-        fields = '__all__'
+        fields = "__all__"
+        read_only_fields = ["usuario", "fecha_creacion", "estado"]
 
 class CalificacionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -35,3 +38,4 @@ class TuristaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Turista
         fields = '__all__'
+

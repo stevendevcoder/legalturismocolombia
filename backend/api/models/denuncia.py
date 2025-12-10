@@ -12,7 +12,11 @@ class Denuncia(models.Model):
     descripcion = models.TextField()
     evidencia = models.FileField(upload_to='evidencias/', blank=True, null=True)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
-    estado = models.CharField(max_length=50, default='pendiente')
+    estado = models.CharField(
+        max_length=20,
+        choices=[('pendiente', 'Pendiente'), ('resuelta', 'Resuelta')],
+        default='pendiente'
+    )
 
     def __str__(self):
         return f"Denuncia de {self.usuario} a {self.prestador}"
@@ -20,3 +24,5 @@ class Denuncia(models.Model):
     class Meta:
         verbose_name = "Denuncia"
         verbose_name_plural = "Denuncias"
+    
+    

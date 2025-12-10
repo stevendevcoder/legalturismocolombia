@@ -18,3 +18,6 @@ class Calificacion(models.Model):
     class Meta:
         verbose_name = "Calificación"
         verbose_name_plural = "Calificaciones"
+        
+   
+    
