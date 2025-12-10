@@ -34,7 +34,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
         return fecha.date() if hasattr(fecha, 'date') else fecha
 
 class RegistrationSerializer(serializers.Serializer):
-    # Datos básicos del usuario
+    
     email = serializers.EmailField()
     password = serializers.CharField(write_only=True, min_length=6)
     nombre = serializers.CharField()
@@ -54,15 +54,15 @@ class RegistrationSerializer(serializers.Serializer):
     prestador = PrestadorSerializer(required=False)
 
     def to_internal_value(self, data):
-        # Convertir QueryDict a diccionario plano python mutable
+        
         if hasattr(data, 'dict'):
             data = data.dict()
         else:
-            data = data.copy() # Si ya es dict, copiamos
+            data = data.copy() 
 
         tipo = data.get("nombre_tipo")
 
-        # Helper para mover campos planos a un diccionario anidado
+        
         def nest_data(serializer_cls, target_key):
             fields = serializer_cls().fields.keys()
             nested_dict = {}
