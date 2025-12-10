@@ -12,7 +12,7 @@ class EmpleadoViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = EmpleadoRegistrado.objects.filter(is_active=True)
         
-        # Filter by current user's company
+        
         mine = self.request.query_params.get('mine', None)
         if mine == 'true' and self.request.user.is_authenticated:
             user = self.request.user
@@ -26,14 +26,14 @@ class EmpleadoViewSet(viewsets.ModelViewSet):
         return queryset
 
     def perform_create(self, serializer):
-        # Assign company based on logged in user
+        
         user = self.request.user
         empresa = EmpresaPrestadora.objects.filter(usuario=user).first()
         
         if empresa:
             serializer.save(nit_empresa_fk=empresa)
         else:
-            # Handle case where user is not a company
+            
             raise PermissionError("Solo empresas pueden registrar empleados")
 
     def destroy(self, request, *args, **kwargs):
