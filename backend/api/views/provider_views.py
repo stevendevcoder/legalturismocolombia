@@ -14,7 +14,7 @@ class ProviderViewSet(viewsets.ViewSet):
     """
 
     def list(self, request):
-        # Filters
+        
         categoria = request.query_params.get('categoria', None)
         ciudad = request.query_params.get('ciudad', None)
 
@@ -23,9 +23,7 @@ class ProviderViewSet(viewsets.ViewSet):
 
         if categoria:
             empresas = empresas.filter(categoria_empresa=categoria)
-            # Individual might not have exact 'categoria_empresa'
-            # Assuming 'profesion_servicio_principal' matches or we ignore individuals for this filter
-            # Or we can check if individual has a service of that category
+            
             
         if ciudad:
             empresas = empresas.filter(direccion__icontains=ciudad) # Rough approximation
@@ -40,18 +38,7 @@ class ProviderViewSet(viewsets.ViewSet):
         })
 
     def retrieve(self, request, pk=None):
-        # PK is expected to be user_id or we try to find in both
-        # Let's assume PK IS the Provider ID if we wanted specific, but for collision avoidance...
-        # Let's try to find in Empresa first, then Individual.
-        # Note: If pk=1, it could be Empresa 1 OR Individual 1.
-        # This implementation assumes the client knows context or we accept "type-id" format.
-        # For simplicity of the request "GET /api/providers/{id}/", let's assume valid ID unique approach or just check both.
         
-        # Strategy: Return matching from both (one should be empty hopefully if IDs don't collide much or if client knows)
-        # BETTER: Use a query param 'type' or use User ID.
-        # The prompt says "/api/providers/{id}/".
-        
-        # Let's look for ID in both.
         empresa = EmpresaPrestadora.objects.filter(pk=pk).first()
         if empresa:
             serializer = EmpresaPrestadoraSerializer(empresa)
@@ -66,9 +53,9 @@ class ProviderViewSet(viewsets.ViewSet):
 
     @action(detail=True, methods=['get'])
     def certificates(self, request, pk=None):
-        # Find provider
+        
         provider = None
-        # Try empresa
+        
         empresa = EmpresaPrestadora.objects.filter(pk=pk).first()
         if empresa:
             certs = empresa.certificados.all()
