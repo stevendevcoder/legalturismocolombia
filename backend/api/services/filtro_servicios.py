@@ -1,7 +1,7 @@
-from api.models.servicio import ServicioTuristico
+from api.models.servicio import CardServicioVenta
 
 def filtrar_servicios(categoria=None, ciudad=None, certificado=None):
-    queryset = ServicioTuristico.objects.all()
+    queryset = CardServicioVenta.objects.all()
     
     if categoria:
         queryset = queryset.filter(categoria=categoria)

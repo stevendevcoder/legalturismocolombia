@@ -24,9 +24,4 @@ class EmpresaPrestadora(models.Model):
     id_usuario = models.ForeignKey(
         Usuario, on_delete=models.CASCADE
     )
-    id_cardServicioVenta = models.ForeignKey(
-        CardServicioVenta, on_delete=models.SET_NULL, null=True
-    )
-    id_certificadosHabilidades = models.ForeignKey(
-        CertificadoHabilidad, on_delete=models.SET_NULL, null=True
-    )
+    # Removed id_cardServicioVenta and id_certificadosHabilidades as they are now Reverse Relations (OneToMany)

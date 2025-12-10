@@ -8,8 +8,13 @@ from api.views.general_views import (
     TuristaViewSet
 )
 
+from api.views.provider_views import ProviderViewSet
+from api.views.service_views import ServiceViewSet
+
 router = DefaultRouter()
 router.register(r'turistas', TuristaViewSet)
+router.register(r'providers', ProviderViewSet, basename='provider')
+router.register(r'services', ServiceViewSet, basename='service')
 
 urlpatterns = [
     path('', include(router.urls)),

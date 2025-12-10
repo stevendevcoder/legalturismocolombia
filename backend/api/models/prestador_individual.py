@@ -13,9 +13,4 @@ class PrestadorIndividual(models.Model):
     url_permiso_alcaldia = models.CharField(max_length=255)
 
     id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
-    id_certificados_habilidades = models.ForeignKey(
-        CertificadoHabilidad, on_delete=models.SET_NULL, null=True
-    )
-    id_cardServicioVenta = models.ForeignKey(
-        CardServicioVenta, on_delete=models.SET_NULL, null=True
-    )
+    # Removed id_cardServicioVenta and id_certificadosHabilidades as they are now Reverse Relations (OneToMany)
