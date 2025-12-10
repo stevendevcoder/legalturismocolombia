@@ -3,7 +3,7 @@ from .denuncia import RegistroReporte
 from .turista import Turista
 from .empresas_prestadoras import EmpresaPrestadora
 from .empleados_registrados import EmpleadoRegistrado
-from .certificados import CertificadoHabilidad
+from .certificados import Certificado 
 from .prestador_individual import PrestadorIndividual
 from .servicio import CardServicioVenta
 from .calificacion import CalificacionServicioUsuario

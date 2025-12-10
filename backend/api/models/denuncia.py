@@ -8,13 +8,12 @@ class RegistroReporte(models.Model):
         QUEJA = "QUEJA"
         RECLAMO = "RECLAMO"
         DENUNCIA = "DENUNCIA"
-
     class EstadoGestion(models.TextChoices):
         ABIERTO = "ABIERTO"
         EN_PROCESO = "EN_PROCESO"
         CERRADO = "CERRADO"
 
-    fecha_hora_reporte = models.DateTimeField()
+    fecha_hora_reporte = models.DateTimeField(null=True, blank=True)
     tipo_reporte = models.CharField(max_length=20, choices=TipoReporte.choices)
     descripcion_detallada = models.TextField()
     url_evidencia_adjunta = models.CharField(max_length=255, null=True, blank=True)

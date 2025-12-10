@@ -1,6 +1,6 @@
 from django.db import models
-from .usuario import Usuario
-from .certificados import CertificadoHabilidad
+from django.conf import settings
+from .certificados import Certificado
 from .servicio import CardServicioVenta
 
 class EmpresaPrestadora(models.Model):
@@ -20,8 +20,7 @@ class EmpresaPrestadora(models.Model):
     url_rnt_certificado = models.CharField(max_length=255)
     matricula_mercantil = models.CharField(max_length=50)
     url_cert_camara_comercio = models.CharField(max_length=255)
-
-    id_usuario = models.ForeignKey(
-        Usuario, on_delete=models.CASCADE
-    )
-    # Removed id_cardServicioVenta and id_certificadosHabilidades as they are now Reverse Relations (OneToMany)
+    
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='empresa_prestadora')
+    card_servicio = models.ForeignKey(CardServicioVenta, on_delete=models.SET_NULL, null=True, blank=True)
+    certificado = models.ForeignKey(Certificado, on_delete=models.SET_NULL, null=True, blank=True)

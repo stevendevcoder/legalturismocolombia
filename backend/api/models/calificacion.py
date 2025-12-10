@@ -15,6 +15,6 @@ class CalificacionServicioUsuario(models.Model):
     puntuacion_certificados = models.CharField(max_length=2, choices=Escala.choices)
     calificacion_puntualidad = models.CharField(max_length=2, choices=Escala.choices)
     calificacion_limpieza = models.CharField(max_length=2, choices=Escala.choices)
-    fecha_calificacion = models.DateTimeField()
+    fecha_calificacion = models.DateTimeField(null=True, blank=True)
     id_card_servicio = models.ForeignKey(CardServicioVenta, on_delete=models.CASCADE)
     id_turistas = models.ForeignKey(Turista, on_delete=models.CASCADE)
