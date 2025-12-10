@@ -2,6 +2,8 @@ from rest_framework import serializers
 from api.models import Usuario, EmpresaPrestadora, PrestadorIndividual, RegistroReporte, CalificacionServicioUsuario, Turista
 from api.models.servicio import CardServicioVenta
 
+
+
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
@@ -19,8 +21,9 @@ class ServicioTuristicoSerializer(serializers.ModelSerializer):
 
 class DenunciaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = RegistroReporte
-        fields = '__all__'
+        model = Denuncia
+        fields = "__all__"
+        read_only_fields = ["usuario", "fecha_creacion", "estado"]
 
 class CalificacionSerializer(serializers.ModelSerializer):
     class Meta:

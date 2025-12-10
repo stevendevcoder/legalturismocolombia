@@ -18,3 +18,14 @@ class CalificacionServicioUsuario(models.Model):
     fecha_calificacion = models.DateTimeField(null=True, blank=True)
     id_card_servicio = models.ForeignKey(CardServicioVenta, on_delete=models.CASCADE)
     id_turistas = models.ForeignKey(Turista, on_delete=models.CASCADE)
+
+    
+    def __str__(self):
+        return f"Calificación {self.puntuacion} de {self.usuario}"
+
+    class Meta:
+        verbose_name = "Calificación"
+        verbose_name_plural = "Calificaciones"
+        
+   
+    
