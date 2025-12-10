@@ -25,7 +25,7 @@ class TuristaSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         usuario_data = validated_data.pop('id_usuario')
-        # Create user properly
+        
         usuario_serializer = UsuarioSerializer(data=usuario_data)
         usuario_serializer.is_valid(raise_exception=True)
         usuario = usuario_serializer.save()
