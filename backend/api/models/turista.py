@@ -1,8 +1,8 @@
 from django.db import models
-from django.conf import settings # Best practice para referenciar al usuario
+from django.conf import settings
 
 class Turista(models.Model):
-    # Cambié 'id_usuario' por 'usuario' para ser más pythonico
+    
     usuario = models.OneToOneField(
         settings.AUTH_USER_MODEL, 
         on_delete=models.CASCADE, 
