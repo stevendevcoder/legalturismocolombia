@@ -26,8 +26,7 @@ class UsuarioRepo:
         Actualiza los campos y guarda en base de datos.
         """
         for key, value in data.items():
-            # setattr es una función de Python que asigna valor a un atributo
-            # Equivalente a: usuario.nombre = value
+            
             setattr(usuario, key, value)
         
         usuario.save()
