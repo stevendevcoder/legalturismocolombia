@@ -8,7 +8,7 @@ class Certificado(models.Model):
     fecha_expedicion = models.DateField(null=True, blank=True)
     url_documento_vigente = models.URLField(max_length=255)
     
-    # Relations
+    
     empresa_prestadora = models.ForeignKey('EmpresaPrestadora', on_delete=models.CASCADE, null=True, blank=True, related_name='certificados')
     prestador_individual = models.ForeignKey('PrestadorIndividual', on_delete=models.CASCADE, null=True, blank=True, related_name='certificados')
 
